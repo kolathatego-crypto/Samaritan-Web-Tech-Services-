@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,9 +41,9 @@
             <span class="brand-name">SAMARITAN <small>Web Tech Services</small></span>
         </div>
         <nav class="nav-links">
-            <button onclick="switchView('samaritan-admin')" class="nav-btn active"><i class="fa-solid fa-chart-line"></i> Master Admin</button>
-            <button onclick="switchView('tenant-portal')" class="nav-btn"><i class="fa-solid fa-house-user"></i> Tenant Pay</button>
-            <button onclick="switchView('landlord-portal')" class="nav-btn"><i class="fa-solid fa-building-user"></i> Landlord Portal</button>
+            <button onclick="switchView('samaritan-admin')" class="nav-btn active" id="nav-btn-admin"><i class="fa-solid fa-chart-line"></i> Master Admin</button>
+            <button onclick="switchView('tenant-portal')" class="nav-btn" id="nav-btn-tenant"><i class="fa-solid fa-house-user"></i> Tenant Pay</button>
+            <button onclick="switchView('landlord-portal')" class="nav-btn" id="nav-btn-landlord"><i class="fa-solid fa-building-user"></i> Landlord Portal</button>
         </nav>
     </header>
 
@@ -57,11 +58,11 @@
                 <div class="hero-overlay-content">
                     <h1 class="hero-title">SAMARITAN</h1>
                     <h3 class="hero-subtitle">Web Tech Services</h3>
-                    <p class="hero-tagline">Master Command Center & Property Management</p>
+                    <p class="hero-tagline">Integrated Property Management Portal</p>
                 </div>
             </div>
 
-            <!-- Revenue Overview Metrics -->
+            <!-- System Metrics -->
             <div class="metrics-grid">
                 <div class="card metric-card dark-card">
                     <i class="fa-solid fa-wallet metric-icon"></i>
@@ -86,55 +87,215 @@
                 </div>
             </div>
 
-            <!-- Landlord & Multi-Yard Onboarding Form -->
+            <!-- Landlord Registration & Dynamic Onboarding Form -->
             <div class="grid-2col">
                 <div class="card form-card dark-card">
-                    <h3><i class="fa-solid fa-user-plus"></i> Register Landlord & Premises/Phases</h3>
+                    <h3><i class="fa-solid fa-user-plus"></i> Register Landlord & Properties</h3>
                     <form id="add-landlord-form" onsubmit="event.preventDefault(); handleLandlordRegistration();">
+                        
                         <div class="form-group">
-                            <label>Landlord Full Name</label>
-                            <input type="text" id="landlord-name" placeholder="e.g. Mr. Khumalo" required>
+                            <label><i class="fa-solid fa-id-card"></i> Landlord Full Name</label>
+                            <input type="text" id="landlord-name" placeholder="e.g. Enter Landlord Name" required>
                         </div>
                         <div class="form-group">
-                            <label>Landlord Phone / WhatsApp</label>
+                            <label><i class="fa-solid fa-phone"></i> Landlord Phone / WhatsApp</label>
                             <input type="tel" id="landlord-phone" placeholder="e.g. 0821234567" required>
                         </div>
                         <div class="form-group">
-                            <label>Landlord Bank Account / Payout Details</label>
-                            <input type="text" id="landlord-bank" placeholder="Bank Name & Account Number" required>
+                            <label><i class="fa-solid fa-building-columns"></i> Landlord Bank Account / Payout Details</label>
+                            <input type="text" id="landlord-bank" placeholder="e.g. Bank Name - Account Number" required>
                         </div>
                         
                         <hr class="divider">
                         
-                        <h4><i class="fa-solid fa-location-dot"></i> Add Property Premises / Extension / Phase</h4>
+                        <h4><i class="fa-solid fa-location-dot"></i> Properties & Yards Dynamic Setup</h4>
+                        
                         <div class="form-group">
-                            <label>Yard / Phase Name</label>
-                            <input type="text" id="property-name" placeholder="e.g. Lotus Gardens Phase 4" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Unique Code (for link generation)</label>
-                            <input type="text" id="property-code" placeholder="e.g. lotus-phase-4" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Room Numbers & Prices (JSON or Comma List)</label>
-                            <input type="text" id="room-prices-input" placeholder="e.g. Room 1: 2000, Room 2: 2500, Room 3: 5000" required>
-                            <small>Format: Room Number: Price</small>
+                            <label>Number of Places / Properties Owned</label>
+                            <input type="number" id="num-places" min="1" max="10" placeholder="e.g. 2" oninput="renderPlacesSetup()" required>
                         </div>
 
-                        <button type="submit" class="btn btn-gold"><i class="fa-solid fa-save"></i> Save Yard & Generate Tenant Links</button>
+                        <!-- Dynamic Container for Places, Yards, and Rooms -->
+                        <div id="places-dynamic-container" class="dynamic-container">
+                            <!-- Populated dynamically via JS when num-places is entered -->
+                        </div>
+
+                        <button type="submit" class="btn btn-gold" style="margin-top:20px; width:100%;">
+                            <i class="fa-solid fa-rocket"></i> Submit & Generate All Payment & Dashboard Links
+                        </button>
                     </form>
                 </div>
 
                 <!-- Generated Links Output Card -->
                 <div class="card form-card dark-card">
                     <h3><i class="fa-solid fa-link"></i> Generated Portal Links</h3>
-                    <p class="subtitle-text">Copy and share these links with landlords or tenants:</p>
+                    <p class="subtitle-text">Your generated Tenant Payment links and Landlord Dashboard link will appear here upon submission:</p>
                     
                     <div id="generated-links-container" class="links-output-box">
-                        <p class="placeholder-text">No links generated yet. Onboard a landlord/yard on the left to create links.</p>
+                        <p class="placeholder-text"><i class="fa-solid fa-info-circle"></i> Fill in the property details on the left and tap Submit to generate distinct yard payment links and landlord portal URL.</p>
                     </div>
                 </div>
             </div>
+
+            <!-- ============================================================ -->
+            <!-- LIVE INTERACTIVE PREVIEW & STRUCTURE SHOWCASE               -->
+            <!-- ============================================================ -->
+            <div class="demo-showcase-section" style="margin-top: 40px;">
+                <div class="section-title-box">
+                    <h2><i class="fa-solid fa-desktop"></i> Integrated Property Management Portal Overview</h2>
+                    <p>Dynamic breakdown structure for Landlord Dashboard, Tenant Payment Portal, and Auto Fee Splitting.</p>
+                </div>
+
+                <!-- SECTION 1: LANDLORD DASHBOARD -->
+                <div class="card dark-card demo-card" style="margin-bottom: 25px;">
+                    <div class="demo-badge badge-green"><i class="fa-solid fa-chart-pie"></i> SECTION 1: LANDLORD DASHBOARD</div>
+                    <h3><i class="fa-solid fa-user-tie"></i> Landlord Management View</h3>
+                    
+                    <div class="mockup-dashboard-box" style="margin-top: 15px;">
+                        <div class="demo-filter-bar">
+                            <label>Select Place to View:</label>
+                            <div class="tab-buttons">
+                                <button class="demo-tab active">[ e.g. Place 1 ]</button>
+                                <button class="demo-tab">[ e.g. Place 2 ]</button>
+                            </div>
+                        </div>
+
+                        <div class="demo-filter-bar" style="margin-top:10px;">
+                            <label>Select Yard / Extension:</label>
+                            <div class="tab-buttons">
+                                <button class="demo-tab sub-tab active">[ e.g. Extension 1 ]</button>
+                                <button class="demo-tab sub-tab">[ e.g. Extension 2 ]</button>
+                                <button class="demo-tab sub-tab">[ e.g. Extension 3 ]</button>
+                            </div>
+                        </div>
+
+                        <div class="demo-summary-box" style="margin-top:15px; padding:12px; background:rgba(255,255,255,0.05); border-radius:6px;">
+                            <h4 style="color:#FFD700; margin-bottom:8px;"><i class="fa-solid fa-house"></i> [ SELECTED YARD / EXTENSION SUMMARY ]</h4>
+                            <div style="display:flex; justify-between; align-items:center;">
+                                <span><strong>Payment Status:</strong></span>
+                                <span style="color:#00E676; font-weight:bold;">[ Dynamic Paid Ratio e.g. X / Y Rooms Paid ]</span>
+                            </div>
+                            <div style="display:flex; justify-between; align-items:center; margin-top:5px;">
+                                <span><strong>Total Rent Collected:</strong></span>
+                                <span style="color:#FFD700; font-weight:bold;">R [ Dynamic Collected Total ] / R [ Dynamic Expected Total ]</span>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive" style="margin-top:15px;">
+                            <table class="white-table" style="font-size:0.85rem;">
+                                <thead>
+                                    <tr>
+                                        <th>Room Number</th>
+                                        <th>Monthly Rent</th>
+                                        <th>Tenant Name / Ref</th>
+                                        <th>Payment Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>[ e.g. Room 1 ]</td>
+                                        <td>R [ Room 1 Price ]</td>
+                                        <td>[ Tenant Reference ]</td>
+                                        <td><span style="color:#00E676; font-weight:bold;">[ ✅ Paid / ❌ Unpaid ]</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>[ e.g. Room 2 ]</td>
+                                        <td>R [ Room 2 Price ]</td>
+                                        <td>[ Tenant Reference ]</td>
+                                        <td><span style="color:#00E676; font-weight:bold;">[ ✅ Paid / ❌ Unpaid ]</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>[ e.g. Room N... ]</td>
+                                        <td>R [ Room N Price ]</td>
+                                        <td>[ Tenant Reference ]</td>
+                                        <td><span style="color:#00E676; font-weight:bold;">[ ✅ Paid / ❌ Unpaid ]</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2col">
+                    <!-- SECTION 2: TENANT PAYMENT PORTAL -->
+                    <div class="card dark-card demo-card">
+                        <div class="demo-badge"><i class="fa-solid fa-eye"></i> SECTION 2: TENANT PAYMENT PORTAL</div>
+                        <h3><i class="fa-solid fa-mobile-screen-button"></i> Tenant Online Rent Payment</h3>
+                        
+                        <div class="mockup-phone-box" style="margin-top: 15px;">
+                            <div class="mockup-header">
+                                <i class="fa-solid fa-building-flag"></i>
+                                <span>[ Dynamic Property / Extension Name ]</span>
+                            </div>
+                            <div class="form-group" style="margin-top: 10px;">
+                                <label><i class="fa-solid fa-door-open"></i> Select Your Room Number:</label>
+                                <select class="select-input" disabled>
+                                    <option>-- Select Room Number --</option>
+                                    <option>[ Room 1 Option ]</option>
+                                    <option>[ Room 2 Option ]</option>
+                                    <option>[ Room N Option ]</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Monthly Rent Amount:</label>
+                                <input type="text" value="R [ Auto-populated based on selected room price ]" disabled style="font-weight:bold; color:#00E676; font-size:0.9rem; background:#222;">
+                            </div>
+                            <div class="form-group">
+                                <label>Tenant Name / Reference:</label>
+                                <input type="text" placeholder="e.g. [ Enter Tenant Full Name ]" disabled style="background:#222;">
+                            </div>
+                            <div class="form-group">
+                                <label>Tenant Phone / WhatsApp:</label>
+                                <input type="text" placeholder="e.g. [ Enter Phone Number ]" disabled style="background:#222;">
+                            </div>
+                            <button class="btn btn-pay-now" disabled style="opacity:0.8; cursor:not-allowed;">
+                                <i class="fa-solid fa-lock"></i> Pay Rent Securely Online
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 3: AUTOMATIC PAYMENT SPLIT & FEE BREAKDOWN SUMMARY -->
+                    <div class="card dark-card demo-card">
+                        <div class="demo-badge badge-gold"><i class="fa-solid fa-bolt"></i> SECTION 3: AUTOMATIC SPLIT SUMMARY</div>
+                        <h3><i class="fa-solid fa-calculator"></i> Payment Split & Fee Breakdown</h3>
+                        
+                        <div style="margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid #444;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                                <span>Total Rent Paid (Tenant):</span>
+                                <strong style="color:#fff;">R [ Dynamic Selected Room Rent ]</strong>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; margin-bottom:8px; color:#ff6b6b;">
+                                <span>Paystack Transaction Fee (-):</span>
+                                <strong>- R [ Dynamic Calculated Paystack Fee ]</strong>
+                            </div>
+                            <hr style="border-color:#444; margin:10px 0;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                                <span>Net Amount Remaining:</span>
+                                <strong style="color:#00E676;">R [ Dynamic Net Pool ]</strong>
+                            </div>
+                            
+                            <div style="padding-left:10px; border-left:2px solid #FFD700; margin-bottom:8px;">
+                                <div style="display:flex; justify-content:space-between;">
+                                    <span>🏠 Landlord Payout (Direct Bank):</span>
+                                    <strong style="color:#FFD700;">R [ Guaranteed Landlord Agreed Net ]</strong>
+                                </div>
+                            </div>
+                            <div style="padding-left:10px; border-left:2px solid #00E676;">
+                                <div style="display:flex; justify-content:space-between;">
+                                    <span>⚡ Samaritan Web Tech Fee:</span>
+                                    <strong style="color:#00E676;">R [ Calculated Samaritan Commission ]</strong>
+                                </div>
+                            </div>
+                            <hr style="border-color:#444; margin:10px 0;">
+                            <div style="text-align:center; color:#888; font-size:0.85rem;">
+                                Status: <span style="color:#00E676;">[ Auto-Split Calculated & Ready for Payout ]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </section>
 
 
@@ -145,17 +306,14 @@
             <div class="payment-box card white-card">
                 <div class="portal-header">
                     <i class="fa-solid fa-building-circle-check portal-icon-blue"></i>
-                    <h2 id="tenant-location-title">Lotus Gardens Phase 4</h2>
+                    <h2 id="tenant-location-title">[ Property Name ]</h2>
                     <p class="subtitle">Official Online Rent Payment Portal</p>
                 </div>
 
                 <div class="payment-step">
                     <label for="tenant-room-select"><i class="fa-solid fa-door-closed"></i> Select Your Room / Unit Number</label>
                     <select id="tenant-room-select" onchange="onRoomSelected()" class="select-input">
-                        <option value="">-- Choose Your Room --</option>
-                        <option value="room-1" data-price="2000">Room 1 - R2,000.00</option>
-                        <option value="room-2" data-price="2500">Room 2 - R2,500.00</option>
-                        <option value="room-3" data-price="5000">Room 3 - R5,000.00</option>
+                        <option value="">-- Select Room Number --</option>
                     </select>
                 </div>
 
@@ -170,8 +328,13 @@
                     </div>
 
                     <div class="form-group" style="margin-top: 15px;">
+                        <label for="tenant-name-input">Your Full Name (Reference)</label>
+                        <input type="text" id="tenant-name-input" placeholder="e.g. Enter Your Full Name" style="padding: 10px; width: 100%; border: 1px solid #ccc; border-radius: 5px;">
+                    </div>
+
+                    <div class="form-group" style="margin-top: 10px;">
                         <label for="tenant-phone-input">Your Phone / WhatsApp Number</label>
-                        <input type="tel" id="tenant-phone-input" placeholder="e.g. 0712345678" style="padding: 10px; width: 100%; border: 1px solid #ccc; border-radius: 5px;">
+                        <input type="tel" id="tenant-phone-input" placeholder="e.g. Enter Phone Number" style="padding: 10px; width: 100%; border: 1px solid #ccc; border-radius: 5px;">
                     </div>
 
                     <button class="btn btn-pay-now" onclick="triggerPaystackPayment()"><i class="fa-solid fa-lock"></i> Pay Rent Securely Online</button>
@@ -189,6 +352,23 @@
                 <p id="landlord-welcome">Live Property & Room Payment Ledger</p>
             </div>
 
+            <!-- Dynamic Place and Yard Selectors for Landlord -->
+            <div class="card white-card" style="margin-bottom: 20px;">
+                <div class="form-group">
+                    <label><strong>Select Place/Property:</strong></label>
+                    <div id="landlord-place-tabs" class="tab-buttons">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 15px;">
+                    <label><strong>Select Yard/Extension:</strong></label>
+                    <div id="landlord-yard-tabs" class="tab-buttons">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
             <div class="card white-card table-card">
                 <h3><i class="fa-solid fa-receipt"></i> Tenant Payment Ledger</h3>
                 <div class="table-responsive">
@@ -198,9 +378,9 @@
                                 <th>Property / Phase</th>
                                 <th>Room Number</th>
                                 <th>Rent Amount</th>
+                                <th>Tenant Name</th>
                                 <th>Date Paid</th>
-                                <th>Samaritan Fee</th>
-                                <th>Net Payout Status</th>
+                                <th>Payment Status</th>
                             </tr>
                         </thead>
                         <tbody id="landlord-ledger-body">
@@ -216,14 +396,16 @@
     <!-- Paystack Official Inline SDK Script -->
     <script src="https://js.paystack.co/v1/inline.js"></script>
 
-    <!-- SPA & UI Script -->
+    <!-- SPA & Inline Script for UI Logic -->
     <script>
+        // Enter Samaritan Dashboard from Landing
         function enterSamaritanDashboard() {
             document.getElementById('samaritan-landing').classList.remove('active-view');
             document.getElementById('main-nav').classList.remove('hidden-nav');
             switchView('samaritan-admin');
         }
 
+        // Switch Views SPA
         function switchView(viewId) {
             document.querySelectorAll('.page-view').forEach(view => {
                 view.classList.remove('active-view');
@@ -236,9 +418,140 @@
             if (targetView) {
                 targetView.classList.add('active-view');
             }
+
+            const targetNav = document.getElementById('nav-btn-' + viewId.replace('samaritan-', '').replace('-portal', ''));
+            if(targetNav) targetNav.classList.add('active');
         }
 
-        // Auto-calculates rent based on selected room
+        // Dynamic Form Generator for Places -> Yards -> Rooms
+        function renderPlacesSetup() {
+            const numPlaces = parseInt(document.getElementById('num-places').value) || 0;
+            const container = document.getElementById('places-dynamic-container');
+            container.innerHTML = '';
+
+            for (let p = 1; p <= numPlaces; p++) {
+                const placeBox = document.createElement('div');
+                placeBox.className = 'dynamic-place-box';
+                placeBox.style.cssText = 'border: 1px solid #444; padding: 15px; border-radius: 8px; margin-top: 15px; background: rgba(255,255,255,0.03);';
+                
+                placeBox.innerHTML = `
+                    <h4 style="color:#FFD700;"><i class="fa-solid fa-building"></i> Place ${p}</h4>
+                    <div class="form-group">
+                        <label>Place/Location Name</label>
+                        <input type="text" class="place-name-input" placeholder="e.g. Place ${p} Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Yards in this Place</label>
+                        <input type="number" class="num-yards-input" min="1" max="10" placeholder="e.g. 2" oninput="renderYardsSetup(this, ${p})" required>
+                    </div>
+                    <div class="yards-container-${p}"></div>
+                `;
+                container.appendChild(placeBox);
+            }
+        }
+
+        function renderYardsSetup(input, placeIndex) {
+            const numYards = parseInt(input.value) || 0;
+            const yardsContainer = input.closest('.dynamic-place-box').querySelector(`.yards-container-${placeIndex}`);
+            yardsContainer.innerHTML = '';
+
+            for (let y = 1; y <= numYards; y++) {
+                const yardBox = document.createElement('div');
+                yardBox.className = 'dynamic-yard-box';
+                yardBox.style.cssText = 'border: 1px dashed #666; padding: 12px; border-radius: 6px; margin-top: 10px; margin-left: 10px; background: rgba(0,0,0,0.2);';
+                
+                yardBox.innerHTML = `
+                    <h5 style="color:#00E676;"><i class="fa-solid fa-house"></i> Yard ${y}</h5>
+                    <div class="form-group">
+                        <label>Yard / Extension Name</label>
+                        <input type="text" class="yard-name-input" placeholder="e.g. Extension ${y}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Rooms in this Yard</label>
+                        <input type="number" class="num-rooms-input" min="1" max="20" placeholder="e.g. 3" oninput="renderRoomsSetup(this)" required>
+                    </div>
+                    <div class="rooms-container"></div>
+                `;
+                yardsContainer.appendChild(yardBox);
+            }
+        }
+
+        function renderRoomsSetup(input) {
+            const numRooms = parseInt(input.value) || 0;
+            const roomsContainer = input.closest('.dynamic-yard-box').querySelector('.rooms-container');
+            roomsContainer.innerHTML = '';
+
+            let roomsHTML = '<div style="margin-top:8px; padding-left:10px;"><strong>Room Prices Setup:</strong></div>';
+            for (let r = 1; r <= numRooms; r++) {
+                roomsHTML += `
+                    <div class="form-group" style="display:flex; align-items:center; gap:10px; margin-top:5px;">
+                        <span style="font-size:0.85rem; width:80px;">Room ${r} Price:</span>
+                        <input type="number" class="room-price-input" data-room="Room ${r}" placeholder="Enter Rent Amount" required style="flex:1;">
+                    </div>
+                `;
+            }
+            roomsContainer.innerHTML = roomsHTML;
+        }
+
+        // Handle Landlord Registration & Links Generation
+        function handleLandlordRegistration() {
+            const landlordName = document.getElementById('landlord-name').value;
+            const container = document.getElementById('generated-links-container');
+            
+            const baseUrl = window.location.origin + window.location.pathname;
+            const safeLandlordCode = landlordName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            
+            let linksHTML = `
+                <div style="background: rgba(0,230,118,0.1); border:1px solid #00E676; padding:12px; border-radius:8px; margin-bottom:15px;">
+                    <strong style="color:#00E676;"><i class="fa-solid fa-key"></i> Landlord Private Dashboard Link:</strong>
+                    <input type="text" value="${baseUrl}?dashboard=${safeLandlordCode}" readonly style="width:100%; margin: 6px 0; padding: 6px; background:#111; color:#fff; border:1px solid #444;">
+                    <button class="btn btn-gold-outline" onclick="navigator.clipboard.writeText('${baseUrl}?dashboard=${safeLandlordCode}'); alert('Landlord Dashboard link copied!');"><i class="fa-solid fa-copy"></i> Copy Landlord Link</button>
+                </div>
+                <h5 style="color:#FFD700; margin-bottom:8px;"><i class="fa-solid fa-link"></i> Generated Tenant Payment Links:</h5>
+            `;
+
+            const placeBoxes = document.querySelectorAll('.dynamic-place-box');
+            placeBoxes.forEach((pBox) => {
+                const placeName = pBox.querySelector('.place-name-input').value;
+                const yardBoxes = pBox.querySelectorAll('.dynamic-yard-box');
+
+                yardBoxes.forEach((yBox) => {
+                    const yardName = yBox.querySelector('.yard-name-input').value;
+                    const safeYardCode = `${placeName}-${yardName}`.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                    const tenantLink = `${baseUrl}?yard=${safeYardCode}`;
+
+                    linksHTML += `
+                        <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 6px; margin-bottom: 8px; border-left:3px solid #FFD700;">
+                            <strong style="color: #fff; font-size:0.9rem;">${placeName} - ${yardName}:</strong>
+                            <input type="text" value="${tenantLink}" readonly style="width:100%; margin: 4px 0; padding: 5px; background:#111; color:#fff; border:1px solid #444; font-size:0.85rem;">
+                            <button class="btn btn-gold" style="padding:4px 10px; font-size:0.8rem;" onclick="navigator.clipboard.writeText('${tenantLink}'); alert('Tenant link copied!');"><i class="fa-solid fa-copy"></i> Copy Payment Link</button>
+                        </div>
+                    `;
+                });
+            });
+
+            container.innerHTML = linksHTML;
+            document.getElementById('active-landlords').innerText = '1';
+        }
+
+        // Auto URL Router for Landlord & Tenant Direct Links
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            
+            if (params.has('yard')) {
+                document.getElementById('samaritan-landing').classList.remove('active-view');
+                document.getElementById('main-nav').classList.add('hidden-nav');
+                switchView('tenant-portal');
+                document.getElementById('tenant-location-title').innerText = params.get('yard').toUpperCase().replace(/-/g, ' ');
+            } else if (params.has('dashboard')) {
+                document.getElementById('samaritan-landing').classList.remove('active-view');
+                document.getElementById('main-nav').classList.add('hidden-nav');
+                switchView('landlord-portal');
+                document.getElementById('landlord-welcome').innerText = 'Welcome Back! Property & Room Ledger for ' + params.get('dashboard').toUpperCase().replace(/-/g, ' ');
+            }
+        });
+
+        // Room Selection on Actual Tenant Portal
         function onRoomSelected() {
             const select = document.getElementById('tenant-room-select');
             const selectedOption = select.options[select.selectedIndex];
@@ -254,34 +567,8 @@
             }
         }
 
-        // Mock function to simulate link generation
-        function handleLandlordRegistration() {
-            const propName = document.getElementById('property-name').value;
-            const propCode = document.getElementById('property-code').value;
-            const container = document.getElementById('generated-links-container');
-
-            const baseUrl = window.location.origin + window.location.pathname;
-            const tenantLink = `${baseUrl}?view=tenant-portal&yard=${propCode}`;
-            const landlordLink = `${baseUrl}?view=landlord-portal&yard=${propCode}`;
-
-            container.innerHTML = `
-                <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
-                    <strong style="color: #FFD700;">${propName} (Tenant Payment Link):</strong>
-                    <input type="text" value="${tenantLink}" readonly style="width:100%; margin: 5px 0; padding: 6px; background:#111; color:#fff; border:1px solid #444;">
-                    <button class="btn btn-gold" onclick="navigator.clipboard.writeText('${tenantLink}'); alert('Tenant link copied!');"><i class="fa-solid fa-copy"></i> Copy Tenant Link</button>
-                </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;">
-                    <strong style="color: #00E676;">Landlord Dashboard Link:</strong>
-                    <input type="text" value="${landlordLink}" readonly style="width:100%; margin: 5px 0; padding: 6px; background:#111; color:#fff; border:1px solid #444;">
-                    <button class="btn btn-gold-outline" onclick="navigator.clipboard.writeText('${landlordLink}'); alert('Landlord link copied!');"><i class="fa-solid fa-copy"></i> Copy Landlord Link</button>
-                </div>
-            `;
-        }
-
-        // Paystack Trigger Stub
         function triggerPaystackPayment() {
-            alert('Paystack Checkout Window Initializing...');
-            // PaystackPop.setup({...}) logic connects here via Firebase
+            alert('Paystack Checkout Initializing...');
         }
     </script>
 </body>
