@@ -10,6 +10,7 @@
     --text-muted: #a0a5b1;
     --blue-accent: #007bff;
     --green-accent: #00e676;
+    --red-accent: #ff3d00;
     --white-bg: #f8f9fa;
     --card-white: #ffffff;
     --border-color: #2e323d;
@@ -259,6 +260,24 @@ body {
     margin: 20px 0;
 }
 
+/* Dynamic Setup Cards */
+.dynamic-container {
+    margin-top: 10px;
+}
+
+.dynamic-place-box {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.dynamic-yard-box {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* Buttons */
 .btn {
     width: 100%;
@@ -302,6 +321,121 @@ body {
 }
 
 /* ============================================================ */
+/* SECTION SHOWCASE PREVIEW CARDS & BADGES                      */
+/* ============================================================ */
+.demo-showcase-section {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed var(--border-color);
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.section-title-box {
+    margin-bottom: 20px;
+}
+
+.section-title-box h2 {
+    color: var(--gold);
+    font-size: 1.5rem;
+}
+
+.section-title-box p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.demo-card {
+    position: relative;
+    border: 1px solid #333;
+    padding-top: 35px;
+}
+
+.demo-badge {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: rgba(0, 123, 255, 0.2);
+    color: var(--blue-accent);
+    border: 1px solid var(--blue-accent);
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.badge-green {
+    background: rgba(0, 230, 118, 0.2);
+    color: var(--green-accent);
+    border-color: var(--green-accent);
+}
+
+.badge-gold {
+    background: rgba(255, 215, 0, 0.2);
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+.mockup-phone-box, .mockup-dashboard-box {
+    background: #111319;
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.mockup-header {
+    background: var(--blue-accent);
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+/* Tab Switching in Demo */
+.demo-filter-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.demo-filter-bar label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.demo-tab {
+    background: #1a1d24;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.demo-tab.active {
+    background: var(--gold);
+    color: #000;
+    font-weight: bold;
+    border-color: var(--gold);
+}
+
+.demo-tab.sub-tab.active {
+    background: var(--green-accent);
+    color: #000;
+    border-color: var(--green-accent);
+}
+
+/* ============================================================ */
 /* TENANT & LANDLORD LIGHT THEMES                               */
 /* ============================================================ */
 .white-theme {
@@ -332,6 +466,12 @@ body {
 }
 
 .select-input {
+    background-color: #12141c;
+    color: #fff;
+    border: 1px solid var(--border-color);
+}
+
+.white-theme .select-input {
     background-color: #f8f9fa;
     color: #333;
     border: 1px solid #ccc;
@@ -384,10 +524,19 @@ body {
 .white-table th, .white-table td {
     padding: 12px 15px;
     text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.white-theme .white-table th, .white-theme .white-table td {
     border-bottom: 1px solid #dee2e6;
 }
 
 .white-table th {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--gold);
+}
+
+.white-theme .white-table th {
     background-color: #f8f9fa;
     color: #495057;
 }
@@ -401,4 +550,21 @@ body {
     color: var(--text-muted);
     font-style: italic;
     font-size: 0.9rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .grid-2col {
+        grid-template-columns: 1fr;
+    }
 }
