@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samaritan Web Tech Services</title>
+    <!-- Master Stylesheet Link -->
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- FRONT COVER SCREEN: WELCOME LANDING SCREEN                   -->
+    <!-- ============================================================ -->
+    <section id="samaritan-landing" class="page-view active-view landing-screen">
+        <div class="landing-overlay"></div>
+        <div class="landing-content">
+            <div class="brand-badge">
+                <i class="fa-solid fa-eagle"></i> SAMARITAN WEB TECH SERVICES
+            </div>
+
+            <h1 class="main-title">SAMARITAN</h1>
+            <h2 class="sub-title">Web Tech Services</h2>
+            <p class="tagline">Master Command Platform & Digital Client Services</p>
+            
+            <button class="btn-welcome" onclick="enterSamaritanDashboard()">
+                <i class="fa-solid fa-lock-open"></i> Welcome to Samaritan
+            </button>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TOP NAVIGATION BAR (GLOBAL HEADER)         -->
+    <!-- ========================================== -->
+    <header class="navbar hidden-nav" id="main-nav">
+        <div class="nav-brand">
+            <i class="fa-solid fa-eagle brand-icon"></i>
+            <span class="brand-name">SAMARITAN <small>Web Tech Services</small></span>
+        </div>
+        <nav class="nav-links">
+            <button onclick="switchView('samaritan-admin')" class="nav-btn active"><i class="fa-solid fa-chart-line"></i> Master Admin</button>
+            <button onclick="switchView('tenant-portal')" class="nav-btn"><i class="fa-solid fa-house-user"></i> Tenant Pay</button>
+            <button onclick="switchView('landlord-portal')" class="nav-btn"><i class="fa-solid fa-building-user"></i> Landlord Portal</button>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <!-- ============================================================ -->
+        <!-- VIEW 1: SAMARITAN MASTER DASHBOARD (COMMAND CENTER)          -->
+        <!-- ============================================================ -->
+        <section id="samaritan-admin" class="page-view samaritan-theme">
+            
+            <div class="samaritan-hero-card">
+                <div class="hero-overlay-content">
+                    <h1 class="hero-title">SAMARITAN</h1>
+                    <h3 class="hero-subtitle">Web Tech Services</h3>
+                    <p class="hero-tagline">Master Command Center & Property Management</p>
+                </div>
+            </div>
+
+            <!-- Revenue Overview Metrics -->
+            <div class="metrics-grid">
+                <div class="card metric-card dark-card">
+                    <i class="fa-solid fa-wallet metric-icon"></i>
+                    <div>
+                        <h4>Total System Revenue</h4>
+                        <p class="metric-value" id="total-revenue">R0.00</p>
+                    </div>
+                </div>
+                <div class="card metric-card dark-card">
+                    <i class="fa-solid fa-city metric-icon"></i>
+                    <div>
+                        <h4>Active Landlords</h4>
+                        <p class="metric-value" id="active-landlords">0</p>
+                    </div>
+                </div>
+                <div class="card metric-card dark-card">
+                    <i class="fa-solid fa-door-open metric-icon"></i>
+                    <div>
+                        <h4>Total Managed Yards/Phases</h4>
+                        <p class="metric-value" id="active-yards">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Landlord & Multi-Yard Onboarding Form -->
+            <div class="grid-2col">
+                <div class="card form-card dark-card">
+                    <h3><i class="fa-solid fa-user-plus"></i> Register Landlord & Premises/Phases</h3>
+                    <form id="add-landlord-form" onsubmit="event.preventDefault(); handleLandlordRegistration();">
+                        <div class="form-group">
+                            <label>Landlord Full Name</label>
+                            <input type="text" id="landlord-name" placeholder="e.g. Mr. Khumalo" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Landlord Phone / WhatsApp</label>
+                            <input type="tel" id="landlord-phone" placeholder="e.g. 0821234567" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Landlord Bank Account / Payout Details</label>
+                            <input type="text" id="landlord-bank" placeholder="Bank Name & Account Number" required>
+                        </div>
+                        
+                        <hr class="divider">
+                        
+                        <h4><i class="fa-solid fa-location-dot"></i> Add Property Premises / Extension / Phase</h4>
+                        <div class="form-group">
+                            <label>Yard / Phase Name</label>
+                            <input type="text" id="property-name" placeholder="e.g. Lotus Gardens Phase 4" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Unique Code (for link generation)</label>
+                            <input type="text" id="property-code" placeholder="e.g. lotus-phase-4" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Room Numbers & Prices (JSON or Comma List)</label>
+                            <input type="text" id="room-prices-input" placeholder="e.g. Room 1: 2000, Room 2: 2500, Room 3: 5000" required>
+                            <small>Format: Room Number: Price</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-gold"><i class="fa-solid fa-save"></i> Save Yard & Generate Tenant Links</button>
+                    </form>
+                </div>
+
+                <!-- Generated Links Output Card -->
+                <div class="card form-card dark-card">
+                    <h3><i class="fa-solid fa-link"></i> Generated Portal Links</h3>
+                    <p class="subtitle-text">Copy and share these links with landlords or tenants:</p>
+                    
+                    <div id="generated-links-container" class="links-output-box">
+                        <p class="placeholder-text">No links generated yet. Onboard a landlord/yard on the left to create links.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================ -->
+        <!-- VIEW 2: DYNAMIC TENANT RENTAL PORTAL                         -->
+        <!-- ============================================================ -->
+        <section id="tenant-portal" class="page-view white-theme">
+            <div class="payment-box card white-card">
+                <div class="portal-header">
+                    <i class="fa-solid fa-building-circle-check portal-icon-blue"></i>
+                    <h2 id="tenant-location-title">Lotus Gardens Phase 4</h2>
+                    <p class="subtitle">Official Online Rent Payment Portal</p>
+                </div>
+
+                <div class="payment-step">
+                    <label for="tenant-room-select"><i class="fa-solid fa-door-closed"></i> Select Your Room / Unit Number</label>
+                    <select id="tenant-room-select" onchange="onRoomSelected()" class="select-input">
+                        <option value="">-- Choose Your Room --</option>
+                        <option value="room-1" data-price="2000">Room 1 - R2,000.00</option>
+                        <option value="room-2" data-price="2500">Room 2 - R2,500.00</option>
+                        <option value="room-3" data-price="5000">Room 3 - R5,000.00</option>
+                    </select>
+                </div>
+
+                <div id="rent-details-card" class="rent-display-card hidden">
+                    <div class="rent-info-row">
+                        <span>Payment Status:</span>
+                        <span class="badge badge-pending" id="payment-status-badge">Payment Due</span>
+                    </div>
+                    <div class="rent-info-row">
+                        <span>Monthly Rent Amount:</span>
+                        <strong class="rent-amount-text" id="display-rent-price">R0.00</strong>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label for="tenant-phone-input">Your Phone / WhatsApp Number</label>
+                        <input type="tel" id="tenant-phone-input" placeholder="e.g. 0712345678" style="padding: 10px; width: 100%; border: 1px solid #ccc; border-radius: 5px;">
+                    </div>
+
+                    <button class="btn btn-pay-now" onclick="triggerPaystackPayment()"><i class="fa-solid fa-lock"></i> Pay Rent Securely Online</button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================ -->
+        <!-- VIEW 3: DYNAMIC LANDLORD PORTAL                              -->
+        <!-- ============================================================ -->
+        <section id="landlord-portal" class="page-view white-theme">
+            <div class="view-header">
+                <h2><i class="fa-solid fa-user-tie"></i> Landlord Management Portal</h2>
+                <p id="landlord-welcome">Live Property & Room Payment Ledger</p>
+            </div>
+
+            <div class="card white-card table-card">
+                <h3><i class="fa-solid fa-receipt"></i> Tenant Payment Ledger</h3>
+                <div class="table-responsive">
+                    <table class="white-table">
+                        <thead>
+                            <tr>
+                                <th>Property / Phase</th>
+                                <th>Room Number</th>
+                                <th>Rent Amount</th>
+                                <th>Date Paid</th>
+                                <th>Samaritan Fee</th>
+                                <th>Net Payout Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="landlord-ledger-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Paystack Official Inline SDK Script -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+
+    <!-- SPA & UI Script -->
+    <script>
+        function enterSamaritanDashboard() {
+            document.getElementById('samaritan-landing').classList.remove('active-view');
+            document.getElementById('main-nav').classList.remove('hidden-nav');
+            switchView('samaritan-admin');
+        }
+
+        function switchView(viewId) {
+            document.querySelectorAll('.page-view').forEach(view => {
+                view.classList.remove('active-view');
+            });
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const targetView = document.getElementById(viewId);
+            if (targetView) {
+                targetView.classList.add('active-view');
+            }
+        }
+
+        // Auto-calculates rent based on selected room
+        function onRoomSelected() {
+            const select = document.getElementById('tenant-room-select');
+            const selectedOption = select.options[select.selectedIndex];
+            const price = selectedOption.getAttribute('data-price');
+            const card = document.getElementById('rent-details-card');
+            const displayPrice = document.getElementById('display-rent-price');
+
+            if (price) {
+                displayPrice.innerText = 'R' + parseFloat(price).toLocaleString('en-ZA', { minimumFractionDigits: 2 });
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        }
+
+        // Mock function to simulate link generation
+        function handleLandlordRegistration() {
+            const propName = document.getElementById('property-name').value;
+            const propCode = document.getElementById('property-code').value;
+            const container = document.getElementById('generated-links-container');
+
+            const baseUrl = window.location.origin + window.location.pathname;
+            const tenantLink = `${baseUrl}?view=tenant-portal&yard=${propCode}`;
+            const landlordLink = `${baseUrl}?view=landlord-portal&yard=${propCode}`;
+
+            container.innerHTML = `
+                <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                    <strong style="color: #FFD700;">${propName} (Tenant Payment Link):</strong>
+                    <input type="text" value="${tenantLink}" readonly style="width:100%; margin: 5px 0; padding: 6px; background:#111; color:#fff; border:1px solid #444;">
+                    <button class="btn btn-gold" onclick="navigator.clipboard.writeText('${tenantLink}'); alert('Tenant link copied!');"><i class="fa-solid fa-copy"></i> Copy Tenant Link</button>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;">
+                    <strong style="color: #00E676;">Landlord Dashboard Link:</strong>
+                    <input type="text" value="${landlordLink}" readonly style="width:100%; margin: 5px 0; padding: 6px; background:#111; color:#fff; border:1px solid #444;">
+                    <button class="btn btn-gold-outline" onclick="navigator.clipboard.writeText('${landlordLink}'); alert('Landlord link copied!');"><i class="fa-solid fa-copy"></i> Copy Landlord Link</button>
+                </div>
+            `;
+        }
+
+        // Paystack Trigger Stub
+        function triggerPaystackPayment() {
+            alert('Paystack Checkout Window Initializing...');
+            // PaystackPop.setup({...}) logic connects here via Firebase
+        }
+    </script>
+</body>
+</html>

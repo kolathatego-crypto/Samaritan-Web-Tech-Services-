@@ -1,0 +1,404 @@
+/* ============================================================ */
+/* GLOBAL VARIABLES & RESET                                      */
+/* ============================================================ */
+:root {
+    --gold: #FFD700;
+    --gold-hover: #e6c200;
+    --dark-bg: #0f1117;
+    --card-dark: #1a1d24;
+    --text-light: #f4f4f6;
+    --text-muted: #a0a5b1;
+    --blue-accent: #007bff;
+    --green-accent: #00e676;
+    --white-bg: #f8f9fa;
+    --card-white: #ffffff;
+    --border-color: #2e323d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* ============================================================ */
+/* LANDING COVER SCREEN                                         */
+/* ============================================================ */
+.landing-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #090a0f 0%, #1a1d24 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1000;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.landing-content {
+    max-width: 600px;
+    padding: 20px;
+}
+
+.brand-badge {
+    color: var(--gold);
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.main-title {
+    font-size: 3.5rem;
+    color: var(--gold);
+    letter-spacing: 4px;
+    margin-bottom: 5px;
+}
+
+.sub-title {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    margin-bottom: 15px;
+}
+
+.tagline {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+.btn-welcome {
+    background: var(--gold);
+    color: #000;
+    border: none;
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.btn-welcome:hover {
+    background: var(--gold-hover);
+    transform: translateY(-2px);
+}
+
+/* ============================================================ */
+/* NAVIGATION BAR                                               */
+/* ============================================================ */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #12141c;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.hidden-nav {
+    display: none !important;
+}
+
+.nav-brand {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--gold);
+}
+
+.nav-brand small {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.nav-btn:hover, .nav-btn.active {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(255, 215, 0, 0.05);
+}
+
+/* ============================================================ */
+/* VIEWS & LAYOUT CONTAINERS                                    */
+/* ============================================================ */
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.page-view {
+    display: none;
+}
+
+.page-view.active-view {
+    display: block;
+}
+
+/* Hero Section */
+.samaritan-hero-card {
+    background: linear-gradient(135deg, #1c1f2b 0%, #0d0e14 100%);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.hero-title {
+    color: var(--gold);
+    font-size: 2.2rem;
+}
+
+.hero-subtitle {
+    color: var(--text-light);
+}
+
+.hero-tagline {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: var(--card-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.metric-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.metric-icon {
+    font-size: 2rem;
+    color: var(--gold);
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Forms & Grids */
+.grid-2col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+
+.form-group input, .select-input {
+    width: 100%;
+    padding: 12px;
+    background-color: #12141c;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.form-group input:focus, .select-input:focus {
+    outline: none;
+    border-color: var(--gold);
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: var(--border-color);
+    margin: 20px 0;
+}
+
+/* Buttons */
+.btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-gold {
+    background-color: var(--gold);
+    color: #000;
+}
+
+.btn-gold:hover {
+    background-color: var(--gold-hover);
+}
+
+.btn-gold-outline {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+}
+
+.btn-gold-outline:hover {
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.btn-blue {
+    background-color: var(--blue-accent);
+    color: #fff;
+}
+
+.btn-pay-now {
+    background-color: var(--green-accent);
+    color: #000;
+    font-size: 1.1rem;
+    margin-top: 15px;
+}
+
+/* ============================================================ */
+/* TENANT & LANDLORD LIGHT THEMES                               */
+/* ============================================================ */
+.white-theme {
+    color: #212529;
+}
+
+.white-card {
+    background-color: var(--card-white);
+    color: #212529;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.payment-box {
+    max-width: 500px;
+    margin: 40px auto;
+}
+
+.portal-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.portal-icon-blue {
+    font-size: 2.5rem;
+    color: var(--blue-accent);
+    margin-bottom: 10px;
+}
+
+.select-input {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.rent-display-card {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f1f3f5;
+    border-radius: 8px;
+    border-left: 4px solid var(--green-accent);
+}
+
+.rent-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.rent-amount-text {
+    font-size: 1.4rem;
+    color: #2b8a3e;
+}
+
+.badge-pending {
+    background-color: #fff3bf;
+    color: #f59f00;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Tables */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.white-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.white-table th, .white-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.white-table th {
+    background-color: #f8f9fa;
+    color: #495057;
+}
+
+/* Links Output Box */
+.links-output-box {
+    margin-top: 15px;
+}
+
+.placeholder-text {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.9rem;
+}
