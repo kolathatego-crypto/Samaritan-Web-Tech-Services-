@@ -3,16 +3,20 @@
  */
 
 // ==========================================
-// 1. FIREBASE INITIALIZATION (MODULE IMPORTS)
+// 1. HARDCODED CREDENTIALS FOR VALIDATION
+// ==========================================
+const ALLOWED_CELLPHONE = "0723449512";
+const ALLOWED_PASSWORD  = "Tk@y1503";
+
+// ==========================================
+// 2. FIREBASE INITIALIZATION (MODULE IMPORTS)
 // ==========================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js";
 import { 
   getFirestore, 
   collection, 
-  onSnapshot, 
-  doc, 
-  updateDoc 
+  onSnapshot 
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 // Your Firebase Configuration
@@ -41,7 +45,7 @@ let totalMonthlyIncome = 0;
 let isMaintenanceActive = false;
 
 // ==========================================
-// 2. DOM INITIALIZATION
+// 3. DOM INITIALIZATION
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -49,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const loginCard = document.querySelector('.login-card');
   const dashboardPage = document.querySelector('.dashboard-page');
   const loginForm = document.querySelector('.login-form');
+  const messageBox = document.getElementById('login-message');
 
   // Initially hide dashboard
   if (dashboardPage) {
@@ -59,16 +64,29 @@ document.addEventListener('DOMContentLoaded', () => {
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const cellphone = document.getElementById('cellphone').value.trim();
-      const password = document.getElementById('password').value.trim();
+      const cellphoneInput = document.getElementById('cellphone').value.trim();
+      const passwordInput = document.getElementById('password').value.trim();
 
-      if (cellphone && password) {
-        // Unlock dashboard view
-        if (loginCard) loginCard.style.display = 'none';
-        if (dashboardPage) dashboardPage.style.display = 'flex';
+      // Check entered values against hardcoded credentials
+      if (cellphoneInput === ALLOWED_CELLPHONE && passwordInput === ALLOWED_PASSWORD) {
+        if (messageBox) {
+          messageBox.className = 'login-message success';
+          messageBox.textContent = 'Access granted. Unlocking dashboard...';
+        }
 
-        // Load dynamic data once logged in
-        initializeRealtimeData();
+        setTimeout(() => {
+          if (loginCard) loginCard.style.display = 'none';
+          if (dashboardPage) dashboardPage.style.display = 'flex';
+
+          // Load dynamic data once logged in
+          initializeRealtimeData();
+        }, 500);
+
+      } else {
+        if (messageBox) {
+          messageBox.className = 'login-message error';
+          messageBox.textContent = 'Wrong cellphone number or password.';
+        }
       }
     });
   }
@@ -90,13 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (lightBtn) {
     lightBtn.addEventListener('click', () => {
       document.body.classList.remove('dark-theme');
-      document.body.classList.add('light-theme');
     });
   }
 
   if (darkBtn) {
     darkBtn.addEventListener('click', () => {
-      document.body.classList.remove('light-theme');
       document.body.classList.add('dark-theme');
     });
   }
@@ -120,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// 3. TAB SWITCHING FUNCTIONALITY
+// 4. TAB SWITCHING FUNCTIONALITY
 // ==========================================
 window.switchTab = function (sectionId, evt) {
   // Hide all sections
@@ -143,7 +159,7 @@ window.switchTab = function (sectionId, evt) {
 };
 
 // ==========================================
-// 4. REAL-TIME DATA SYNCHRONIZATION (FIREBASE)
+// 5. REAL-TIME DATA SYNCHRONIZATION (FIREBASE)
 // ==========================================
 function initializeRealtimeData() {
   
@@ -207,7 +223,7 @@ function initializeRealtimeData() {
 }
 
 // ==========================================
-// 5. UI UPDATERS
+// 6. UI UPDATERS
 // ==========================================
 function updateRoomMetricsUI() {
   const total = activeRoomsCount + inactiveRoomsCount;
@@ -259,13 +275,8 @@ function updateFinanceUI() {
 }
 
 // ==========================================
-// 6. PAYSTACK PAYMENT INTEGRATION HELPER
+// 7. PAYSTACK PAYMENT INTEGRATION HELPER
 // ==========================================
-/**
- * Triggers Paystack payment popup for subscriptions or services
- * @param {string} email - Customer email
- * @param {number} amountInZAR - Amount in Rand (ZAR)
- */
 window.payWithPaystack = function (email, amountInZAR) {
   if (typeof PaystackPop === 'undefined') {
     alert("Paystack SDK is loading. Please ensure the Paystack script tag is in your HTML.");
@@ -275,7 +286,7 @@ window.payWithPaystack = function (email, amountInZAR) {
   const handler = PaystackPop.setup({
     key: PAYSTACK_PUBLIC_KEY,
     email: email,
-    amount: amountInZAR * 100, // Amount in kobo/cents
+    amount: amountInZAR * 100, // Amount in cents
     currency: 'ZAR',
     ref: 'SMTRN_' + Math.floor((Math.random() * 1000000000) + 1),
     onClose: function () {
