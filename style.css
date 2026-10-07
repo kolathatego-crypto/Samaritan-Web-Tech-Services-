@@ -16,6 +16,63 @@ body {
   justify-content: flex-start;
   padding: 16px;
   gap: 40px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* DARK MODE BODY PREFERENCES */
+body.dark-theme {
+  background-color: #020617;
+  color: #f8fafc;
+}
+
+body.dark-theme .login-card,
+body.dark-theme .dashboard-page,
+body.dark-theme .top-navbar,
+body.dark-theme .sidebar-menu,
+body.dark-theme .metric-card,
+body.dark-theme .chart-card,
+body.dark-theme .summary-card,
+body.dark-theme .calendar-block,
+body.dark-theme .client-income-block {
+  background-color: #0f172a;
+  border-color: #1e293b;
+  color: #f8fafc;
+}
+
+body.dark-theme .dashboard-content,
+body.dark-theme .input-group input,
+body.dark-theme .svg-line-chart,
+body.dark-theme .day-cell,
+body.dark-theme .client-card-item,
+body.dark-theme .bar-chart-mock {
+  background-color: #1e293b;
+  color: #f8fafc;
+  border-color: #334155;
+}
+
+body.dark-theme .card-header h2,
+body.dark-theme .tab-content h2,
+body.dark-theme .count-value,
+body.dark-theme .summary-amount,
+body.dark-theme .calendar-block h3,
+body.dark-theme .client-income-block h3,
+body.dark-theme .client-info h4 {
+  color: #ffffff;
+}
+
+body.dark-theme .card-header p,
+body.dark-theme .section-subtitle,
+body.dark-theme .count-label,
+body.dark-theme .summary-title,
+body.dark-theme .day-head,
+body.dark-theme .day-cell .amt,
+body.dark-theme .client-info span,
+body.dark-theme .empty-state {
+  color: #94a3b8;
+}
+
+body.dark-theme .percentage {
+  fill: #ffffff;
 }
 
 /* CARD CONTAINER */
@@ -100,6 +157,24 @@ body {
   background-color: #ffffff;
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* LOGIN MESSAGE ELEMENT STYLES */
+.login-message {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+  min-height: 18px;
+  margin-top: -4px;
+  margin-bottom: 2px;
+}
+
+.login-message.error {
+  color: #ef4444;
+}
+
+.login-message.success {
+  color: #22c55e;
 }
 
 .submit-btn {
