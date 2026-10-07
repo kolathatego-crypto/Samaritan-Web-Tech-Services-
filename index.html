@@ -1,321 +1,465 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Samaritan Web Tech Services Platform</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Samaritan Web Tech Services - Dashboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ==========================================================================
-       VIEW 1: MASTER ADMIN LOGIN (AUTHENTICATION GATE)
-       ========================================================================== -->
-  <div id="admin-login-screen">
-    <div class="login-box">
-      <div class="svg-logo" style="justify-content: center; margin-bottom: 1.5rem;">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span>SAMARITAN MASTER</span>
-      </div>
-      <form id="admin-login-form">
-        <div class="form-group" style="text-align: left;">
-          <label>Cellphone Number</label>
-          <input type="text" id="admin-phone" class="form-control" value="0723449512" required>
-        </div>
-        <div class="form-group" style="text-align: left;">
-          <label>Password</label>
-          <input type="password" id="admin-pass" class="form-control" value="Tk@y1503" required>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;">OPEN</button>
-      </form>
+  <!-- PAGE 1: ORIGINAL LOGIN CARD -->
+  <div class="login-card">
+    
+    <!-- SAMARITAN CONCEPT 1 LOGO -->
+    <div class="logo-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 220" width="100%" height="100%">
+        <defs>
+          <linearGradient id="bgGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0F172A"/>
+            <stop offset="100%" stop-color="#020617"/>
+          </linearGradient>
+
+          <linearGradient id="blueCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38BDF8"/>
+            <stop offset="100%" stop-color="#2563EB"/>
+          </linearGradient>
+
+          <linearGradient id="accentGold" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#F59E0B"/>
+            <stop offset="100%" stop-color="#FCD34D"/>
+          </linearGradient>
+
+          <filter id="glow1" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+        </defs>
+
+        <rect width="650" height="220" rx="20" fill="url(#bgGrad1)" stroke="#1E293B" stroke-width="2"/>
+
+        <g transform="translate(45, 35)">
+          <path d="M 65,10 L 115,35 L 115,90 Q 115,125 65,145 Q 15,125 15,90 L 15,35 Z" 
+                fill="none" stroke="url(#blueCyan)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow1)"/>
+          <path d="M 48,65 L 34,80 L 48,95" fill="none" stroke="#38BDF8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 82,65 L 96,80 L 82,95" fill="none" stroke="#38BDF8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 72,60 L 58,100" fill="none" stroke="#60A5FA" stroke-width="4" stroke-linecap="round"/>
+        </g>
+
+        <g transform="translate(190, 65)">
+          <text x="0" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="900" fill="#FFFFFF" letter-spacing="1">
+            SAMARITAN
+          </text>
+          <text x="5" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#38BDF8" letter-spacing="6">
+            WEB TECH SERVICES
+          </text>
+          <line x1="5" y1="96" x2="330" y2="96" stroke="url(#accentGold)" stroke-width="2" stroke-linecap="round"/>
+        </g>
+      </svg>
     </div>
+
+    <!-- TITLE -->
+    <div class="card-header">
+      <h2>Owner Dashboard Access</h2>
+      <p>Enter your credentials to unlock</p>
+    </div>
+
+    <!-- FORM INPUTS -->
+    <form class="login-form">
+      
+      <!-- CELLPHONE NUMBER FIELD -->
+      <div class="input-group">
+        <label for="cellphone">Cellphone Number</label>
+        <input 
+          type="tel" 
+          id="cellphone"
+          name="cellphone"
+          required
+          autocomplete="off"
+          placeholder="Enter cellphone number" 
+          pattern="[0-9]{10}"
+          title="Please enter your cellphone number"
+        />
+      </div>
+
+      <!-- PASSWORD FIELD -->
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password"
+          name="password"
+          required
+          autocomplete="new-password"
+          placeholder="Enter password" 
+          title="Please enter your password"
+        />
+      </div>
+
+      <!-- UNLOCK BUTTON -->
+      <button type="submit" class="submit-btn">
+        UNLOCK
+      </button>
+
+    </form>
+
   </div>
 
-  <!-- ==========================================================================
-       VIEW 2: SAMARITAN MASTER ADMIN DASHBOARD
-       ========================================================================== -->
-  <div id="admin-dashboard" class="dashboard-container hidden">
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <div class="svg-logo" style="color:#ffffff;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span>Samaritan Admin</span>
-        </div>
+
+  <!-- PAGE 2: MAIN DASHBOARD PAGE -->
+  <div class="dashboard-page">
+    
+    <!-- TOP NAVBAR & LOGO HEADER -->
+    <header class="top-navbar">
+      <div class="nav-logo-full">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 220" width="100%" height="100%">
+          <defs>
+            <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0F172A"/>
+              <stop offset="100%" stop-color="#020617"/>
+            </linearGradient>
+
+            <linearGradient id="blueCyan2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#38BDF8"/>
+              <stop offset="100%" stop-color="#2563EB"/>
+            </linearGradient>
+
+            <linearGradient id="accentGold2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#F59E0B"/>
+              <stop offset="100%" stop-color="#FCD34D"/>
+            </linearGradient>
+
+            <filter id="glow2" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+            </filter>
+          </defs>
+
+          <rect width="650" height="220" rx="20" fill="url(#bgGrad2)" stroke="#1E293B" stroke-width="2"/>
+
+          <g transform="translate(45, 35)">
+            <path d="M 65,10 L 115,35 L 115,90 Q 115,125 65,145 Q 15,125 15,90 L 15,35 Z" 
+                  fill="none" stroke="url(#blueCyan2)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow2)"/>
+            <path d="M 48,65 L 34,80 L 48,95" fill="none" stroke="#38BDF8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 82,65 L 96,80 L 82,95" fill="none" stroke="#38BDF8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 72,60 L 58,100" fill="none" stroke="#60A5FA" stroke-width="4" stroke-linecap="round"/>
+          </g>
+
+          <g transform="translate(190, 65)">
+            <text x="0" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="900" fill="#FFFFFF" letter-spacing="1">
+              SAMARITAN
+            </text>
+            <text x="5" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#38BDF8" letter-spacing="6">
+              WEB TECH SERVICES
+            </text>
+            <line x1="5" y1="96" x2="330" y2="96" stroke="url(#accentGold2)" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </svg>
       </div>
-      <ul class="sidebar-menu">
-        <li class="active"><a href="#" onclick="switchAdminTab('tab-custom', this)">Custom Metrics</a></li>
-        <li><a href="#" onclick="switchAdminTab('tab-finance', this)">Finance</a></li>
-        <li><a href="#" onclick="switchAdminTab('tab-analytic', this)">Analytics</a></li>
-        <li><a href="#" onclick="switchAdminTab('tab-files', this)">Landlord Files</a></li>
-        <li><a href="#" onclick="switchAdminTab('tab-links', this)">Public Links Hub</a></li>
-        <li><a href="#" onclick="switchAdminTab('tab-messages', this)">Messages & Voice</a></li>
-        <li><a href="#" onclick="switchAdminTab('tab-reports', this)">Reports & Tickets</a></li>
-        <li><a href="#" onclick="switchAdminTab('tab-settings', this)">Settings</a></li>
-      </ul>
-    </aside>
 
-    <div class="main-wrapper">
-      <header class="top-header">
-        <h3 id="current-tab-title">Custom Overview</h3>
-        <div style="display: flex; gap: 1rem; align-items: center;">
-          <button class="btn btn-outline" onclick="toggleTheme()">Theme Mode</button>
-          <button class="btn btn-secondary" onclick="openPublicPortal()">View Public Portal</button>
+      <div class="theme-buttons">
+        <button type="button" class="theme-btn light-btn">Light Mode</button>
+        <button type="button" class="theme-btn dark-btn">Dark Mode</button>
+      </div>
+    </header>
+
+    <!-- DASHBOARD BODY CONTAINER -->
+    <div class="dashboard-body">
+      
+      <!-- LEFT SIDEBAR MENU -->
+      <aside class="sidebar-menu" id="sidebarMenu">
+        <button type="button" class="toggle-arrow-btn" id="toggleSidebarBtn" aria-label="Toggle Sidebar">
+          <span class="arrow-icon">&#10094;</span>
+        </button>
+
+        <div class="sidebar-buttons">
+          <button type="button" class="side-btn active" onclick="switchTab('homeSection', event)">Home</button>
+          <button type="button" class="side-btn" onclick="switchTab('customerSection', event)">Customer</button>
+          <button type="button" class="side-btn" onclick="switchTab('financeSection', event)">Finance</button>
+          <button type="button" class="side-btn" onclick="switchTab('analyticsSection', event)">Analytics</button>
+          <button type="button" class="side-btn" onclick="switchTab('landlordSection', event)">Landlord files</button>
+          <button type="button" class="side-btn" onclick="switchTab('publicWebsitesSection', event)">Public website link</button>
+          <button type="button" class="side-btn" onclick="switchTab('messagesSection', event)">Messages</button>
+          <button type="button" class="side-btn" onclick="switchTab('reportsSection', event)">Reports</button>
+          <button type="button" class="side-btn" onclick="switchTab('settingsSection', event)">Settings</button>
         </div>
-      </header>
+      </aside>
 
-      <main class="main-content">
-        <!-- 1. CUSTOM TAB -->
-        <div id="tab-custom" class="tab-pane">
-          <div class="grid-cards">
-            <div class="stat-card"><h4>Total Registered Landlords</h4><div class="value">148</div></div>
-            <div class="stat-card"><h4>Active Landlords</h4><div class="value">132</div></div>
-            <div class="stat-card"><h4>Avg Commission Yield</h4><div class="value">8.5%</div></div>
-            <div class="stat-card"><h4>Cumulative Total Yield</h4><div class="value">R 124,500.00</div></div>
-          </div>
-        </div>
+      <!-- MAIN CONTENT AREA -->
+      <main class="dashboard-content">
 
-        <!-- 2. FINANCE TAB -->
-        <div id="tab-finance" class="tab-pane hidden">
-          <h4 style="margin-bottom: 1rem;">Monthly Payout & Collection Breakdown</h4>
-          <table class="data-table">
-            <thead>
-              <tr><th>Landlord Name</th><th>Yards Managed</th><th>Total Collected</th><th>Samaritan Cut</th><th>Status</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Mr. Mabaso</td><td>3 Places / 5 Yards</td><td>R 45,000.00</td><td>R 3,825.00</td><td><span style="color:var(--accent);">Paid</span></td></tr>
-              <tr><td>S. Khumalo</td><td>1 Place / 2 Yards</td><td>R 18,200.00</td><td>R 1,547.00</td><td><span style="color:var(--accent);">Paid</span></td></tr>
-            </tbody>
-          </table>
-        </div>
+        <!-- 1. HOME SECTION -->
+        <section id="homeSection" class="tab-content active">
+          <h2>Home Dashboard</h2>
+          <p class="section-subtitle">Real-time room status indicators and occupancy performance graph.</p>
 
-        <!-- 3. ANALYTIC TAB -->
-        <div id="tab-analytic" class="tab-pane hidden">
-          <h4>Monthly Revenue & Landlord Growth Trends</h4>
-          <div class="chart-box" style="margin-top:1rem;">
-            <div class="chart-bar-wrap">
-              <div class="bar" style="height: 40%;" data-val="Jan"></div>
-              <div class="bar" style="height: 55%;" data-val="Feb"></div>
-              <div class="bar" style="height: 70%;" data-val="Mar"></div>
-              <div class="bar" style="height: 85%;" data-val="Apr"></div>
-              <div class="bar" style="height: 95%;" data-val="May"></div>
+          <div class="circle-metrics-grid">
+            <div class="metric-card">
+              <h3>Active Rooms</h3>
+              <div class="circle-wrapper">
+                <svg viewBox="0 0 36 36" class="circular-chart green">
+                  <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <text x="18" y="20.35" class="percentage">0%</text>
+                </svg>
+              </div>
+              <div class="stat-details">
+                <span class="count-value">0</span>
+                <span class="count-label">Active Rooms</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <h3>Inactive Rooms</h3>
+              <div class="circle-wrapper">
+                <svg viewBox="0 0 36 36" class="circular-chart red">
+                  <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <text x="18" y="20.35" class="percentage">0%</text>
+                </svg>
+              </div>
+              <div class="stat-details">
+                <span class="count-value">0</span>
+                <span class="count-label">Inactive Rooms</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- 4. LANDLORD FILES -->
-        <div id="tab-files" class="tab-pane hidden">
-          <div class="grid-cards">
-            <div class="stat-card">
-              <h3>Mr. Mabaso</h3>
-              <p style="color:var(--text-muted);">Places: 3 | Yards: 5</p>
-              <p style="margin-top:0.5rem;">Rooms: 24 Active / 2 Inactive</p>
-            </div>
-            <div class="stat-card">
-              <h3>S. Khumalo</h3>
-              <p style="color:var(--text-muted);">Places: 1 | Yards: 2</p>
-              <p style="margin-top:0.5rem;">Rooms: 10 Active / 0 Inactive</p>
+          <div class="chart-card">
+            <h3>Active vs. Inactive Rooms Line Graph</h3>
+            <div class="line-graph-placeholder">
+              <div class="graph-legend">
+                <span class="legend-item"><span class="color-dot active-dot"></span> Active Rooms (0 / 0%)</span>
+                <span class="legend-item"><span class="color-dot inactive-dot"></span> Inactive Rooms (0 / 0%)</span>
+              </div>
+              <svg viewBox="0 0 500 150" class="svg-line-chart">
+                <line x1="0" y1="130" x2="500" y2="130" class="line-active" />
+                <line x1="0" y1="130" x2="500" y2="130" class="line-inactive" />
+              </svg>
             </div>
           </div>
-        </div>
+        </section>
 
-        <!-- 5. PUBLIC LINKS HUB -->
-        <div id="tab-links" class="tab-pane hidden">
-          <h4>Managed Directory Links</h4>
-          <div class="stat-card" style="margin-top: 1rem;">
-            <p><strong>Diepsloot Ext 2 - Yard B</strong></p>
-            <input type="text" class="form-control" value="https://samaritan.tech/pay?location=Diepsloot%20Ext%202" readonly style="margin: 0.5rem 0;">
-            <button class="btn btn-primary" onclick="copyLink(this)">Copy Link</button>
-          </div>
-        </div>
+        <!-- 2. CUSTOMER SECTION -->
+        <section id="customerSection" class="tab-content">
+          <h2>Customer Metrics</h2>
+          <p class="section-subtitle">Traffic and active visitor monitoring across your web network.</p>
 
-        <!-- 6. MESSAGES -->
-        <div id="tab-messages" class="tab-pane hidden">
-          <h4>Client Communications & Voice Inbox</h4>
-          <div class="stat-card" style="margin-top:1rem;">
-            <p><strong>From:</strong> Tenant Support Inquiry</p>
-            <p style="color:var(--text-muted);">"Hello, I sent rent payment for Room 4."</p>
-          </div>
-        </div>
+          <div class="circle-metrics-grid">
+            <div class="metric-card">
+              <h3>People On Website</h3>
+              <div class="circle-wrapper">
+                <svg viewBox="0 0 36 36" class="circular-chart blue">
+                  <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <text x="18" y="20.35" class="percentage">0</text>
+                </svg>
+              </div>
+              <div class="stat-details">
+                <span class="count-label">Total Visitors Online</span>
+              </div>
+            </div>
 
-        <!-- 7. REPORTS -->
-        <div id="tab-reports" class="tab-pane hidden">
-          <h4>Complaints & Ticket Center</h4>
-          <div class="stat-card" style="margin-top:1rem;">
-            <p><strong>Ticket #104:</strong> Water maintenance issue reported at Lotus Gardens.</p>
+            <div class="metric-card">
+              <h3>Active Users</h3>
+              <div class="circle-wrapper">
+                <svg viewBox="0 0 36 36" class="circular-chart green">
+                  <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <text x="18" y="20.35" class="percentage">0</text>
+                </svg>
+              </div>
+              <div class="stat-details">
+                <span class="count-label">Currently Engaged</span>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
 
-        <!-- 8. SETTINGS -->
-        <div id="tab-settings" class="tab-pane hidden">
-          <h4>Dashboard Preferences</h4>
-          <div style="margin-top:1rem;">
-            <button class="btn btn-outline" onclick="toggleTheme()">Toggle Theme (Dark/Light)</button>
+        <!-- 3. FINANCE SECTION -->
+        <section id="financeSection" class="tab-content">
+          <h2>Finance Overview</h2>
+          <p class="section-subtitle">Monthly revenue calendar, total income received per month, and client revenue tracking.</p>
+
+          <!-- TOTAL MONTHLY INCOME SUMMARY CARDS -->
+          <div class="monthly-summary-grid">
+            <div class="summary-card">
+              <span class="summary-title">Total Received This Month</span>
+              <span class="summary-amount">R 0.00</span>
+              <span class="summary-subtitle">October 2026 Revenue</span>
+            </div>
+            <div class="summary-card highlight">
+              <span class="summary-title">Total Annual Income</span>
+              <span class="summary-amount">R 0.00</span>
+              <span class="summary-subtitle">Year 2026 Cumulative</span>
+            </div>
           </div>
-        </div>
+
+          <div class="finance-grid">
+            <!-- MONTHLY CALENDAR -->
+            <div class="calendar-block">
+              <h3>Monthly Income Calendar</h3>
+              <div class="month-selector">October 2026</div>
+              <div class="calendar-grid">
+                <div class="day-head">Mon</div>
+                <div class="day-head">Tue</div>
+                <div class="day-head">Wed</div>
+                <div class="day-head">Thu</div>
+                <div class="day-head">Fri</div>
+                <div class="day-head">Sat</div>
+                <div class="day-head">Sun</div>
+                <div class="day-cell">1 <span class="amt">R0</span></div>
+                <div class="day-cell">2 <span class="amt">R0</span></div>
+                <div class="day-cell">3 <span class="amt">R0</span></div>
+                <div class="day-cell">4 <span class="amt">R0</span></div>
+                <div class="day-cell">5 <span class="amt">R0</span></div>
+                <div class="day-cell">6 <span class="amt">R0</span></div>
+                <div class="day-cell">7 <span class="amt">R0</span></div>
+              </div>
+            </div>
+
+            <!-- INCOME PER CLIENT -->
+            <div class="client-income-block">
+              <h3>Income Received Per Client</h3>
+              <div class="client-list">
+                <div class="client-card-item empty-state">
+                  <p>No client revenue recorded yet.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. ANALYTICS SECTION -->
+        <section id="analyticsSection" class="tab-content">
+          <h2>Annual Analytics</h2>
+          <p class="section-subtitle">Yearly metric distribution across Rooms, Landlords, and Revenue.</p>
+
+          <div class="analytics-charts-grid">
+            <div class="chart-card">
+              <h3>Rooms per Year</h3>
+              <div class="bar-chart-mock">
+                <div class="bar-item" style="--h: 0%"><span>2024</span></div>
+                <div class="bar-item" style="--h: 0%"><span>2025</span></div>
+                <div class="bar-item" style="--h: 0%"><span>2026</span></div>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <h3>Landlords per Year</h3>
+              <div class="bar-chart-mock">
+                <div class="bar-item" style="--h: 0%"><span>2024</span></div>
+                <div class="bar-item" style="--h: 0%"><span>2025</span></div>
+                <div class="bar-item" style="--h: 0%"><span>2026</span></div>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <h3>Money Received per Year</h3>
+              <div class="bar-chart-mock">
+                <div class="bar-item" style="--h: 0%"><span>2024</span></div>
+                <div class="bar-item" style="--h: 0%"><span>2025</span></div>
+                <div class="bar-item" style="--h: 0%"><span>2026</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. LANDLORD FILES SECTION -->
+        <section id="landlordSection" class="tab-content">
+          <h2>Landlord Files & Profiles</h2>
+          <p class="section-subtitle">Registered landlord records, property counts, locations, and rooms.</p>
+
+          <div class="files-grid">
+            <p class="empty-state">No landlord files uploaded yet.</p>
+          </div>
+        </section>
+
+        <!-- 6. PUBLIC WEBSITES SECTION -->
+        <section id="publicWebsitesSection" class="tab-content">
+          <h2>Linked Public Websites</h2>
+          <p class="section-subtitle">Websites connected to Samaritan Web Tech Services platform.</p>
+
+          <div class="links-list">
+            <p class="empty-state">No public website links published yet.</p>
+          </div>
+        </section>
+
+        <!-- 7. MESSAGES SECTION -->
+        <section id="messagesSection" class="tab-content">
+          <h2>Messages & Voice Recordings</h2>
+          <p class="section-subtitle">Inbound client messages and voice clips from public websites.</p>
+
+          <div class="messages-container">
+            <p class="empty-state">No messages received yet.</p>
+          </div>
+        </section>
+
+        <!-- 8. REPORTS SECTION -->
+        <section id="reportsSection" class="tab-content">
+          <h2>Public Website Reports</h2>
+          <p class="section-subtitle">System and user reports received across all connected public platforms.</p>
+
+          <div class="reports-list">
+            <p class="empty-state">No reports submitted yet.</p>
+          </div>
+        </section>
+
+        <!-- 9. SETTINGS SECTION -->
+        <section id="settingsSection" class="tab-content">
+          <h2>Dashboard Settings</h2>
+          <p class="section-subtitle">Configure system preferences, user roles, and security options.</p>
+
+          <form class="settings-form">
+            <div class="setting-item">
+              <label for="adminName">Dashboard Owner Name</label>
+              <input type="text" id="adminName" value="MR William Thatego Kola" placeholder="Enter owner name" />
+            </div>
+
+            <div class="setting-item">
+              <label for="notifyEmail">Notification Email</label>
+              <input type="email" id="notifyEmail" value="Kolathatego@gmail.com" placeholder="Enter notification email" />
+            </div>
+
+            <div class="setting-item">
+              <label>System Maintenance Mode</label>
+              <button type="button" class="action-btn warning-btn">Toggle Maintenance Mode</button>
+            </div>
+          </form>
+        </section>
+
       </main>
+
     </div>
+
   </div>
 
-  <!-- ==========================================================================
-       VIEW 3: PUBLIC LANDLORD PORTAL
-       ========================================================================== -->
-  <div id="public-portal" class="hidden">
-    <nav class="portal-nav">
-      <div class="svg-logo">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span>SAMARITAN PUBLIC</span>
-      </div>
-      <div style="display: flex; gap: 1rem;">
-        <button class="btn btn-outline" onclick="openModal('login-modal')">Log In</button>
-        <button class="btn btn-primary" onclick="openModal('signin-modal')">Sign In</button>
-      </div>
-    </nav>
+  <!-- JS SCRIPT FOR SIDEBAR TOGGLE & SECTION SWITCHING -->
+  <script>
+    const toggleBtn = document.getElementById('toggleSidebarBtn');
+    const sidebar = document.getElementById('sidebarMenu');
 
-    <div class="portal-body">
-      <!-- ABOUT SECTION -->
-      <section class="about-card">
-        <h2>About Samaritan Web Tech Services</h2>
-        <p><strong>Samaritan Web Tech Services</strong> is a property technology platform dedicated to simplifying the rental experience for landlords and tenants. The platform offers a secure, stress-free environment for property listings, tenant screening, digital lease agreements, and automated rent tracking.</p>
-        
-        <p style="margin-top: 1rem;">By bridging the gap between landlords and reliable tenants through smart technology, Samaritan helps property owners manage rentals efficiently, reduce vacancies, and grow their income. The system provides an easy-to-use, secure, and reliable solution with dedicated support, focusing on making property management uncomplicated and growth-oriented.</p>
-        
-        <h4 style="margin-top: 1.5rem; color: var(--primary);">Core Services Include:</h4>
-        <ul>
-          <li>Property Advertising</li>
-          <li>Maintenance Management</li>
-          <li>Rent Collection & Automation</li>
-          <li>Centralized Digital Hub Management</li>
-        </ul>
-      </section>
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+    });
 
-      <!-- LANDLORD WORKSPACE -->
-      <section class="about-card">
-        <h3>Landlord Property & Banking Configuration</h3>
-        <form id="property-config-form" style="margin-top: 1rem;">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="form-group"><label>Full Name</label><input type="text" class="form-control" placeholder="e.g. Mr. Mabaso"></div>
-            <div class="form-group"><label>Cellphone</label><input type="text" class="form-control" placeholder="072..."></div>
-            <div class="form-group"><label>Bank Name</label><input type="text" class="form-control" placeholder="Capitec / FNB"></div>
-            <div class="form-group"><label>Account Number</label><input type="text" class="form-control" placeholder="123456789"></div>
-          </div>
-          <button type="button" class="btn btn-secondary" style="margin-bottom: 1.5rem;">Save Banking Details</button>
+    function switchTab(sectionId, evt) {
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => tab.classList.remove('active'));
 
-          <hr style="border:0; border-top:1px solid var(--border); margin: 1.5rem 0;">
+      const selectedTab = document.getElementById(sectionId);
+      if (selectedTab) {
+        selectedTab.classList.add('active');
+      }
 
-          <h4>Dynamic Property Hierarchy Setup</h4>
-          <div class="form-group" style="margin-top: 1rem;">
-            <label>Location / Area Name</label>
-            <input type="text" id="prop-area" class="form-control" placeholder="e.g. Lotus Gardens Phase 4">
-          </div>
-          <div class="form-group">
-            <label>Number of Places / Yards</label>
-            <input type="number" id="prop-yards" class="form-control" placeholder="1">
-          </div>
-          <div class="form-group">
-            <label>Number of Rooms per Yard</label>
-            <input type="number" id="prop-rooms" class="form-control" placeholder="4">
-          </div>
-          <div class="form-group">
-            <label>Monthly Rent Amount per Room (ZAR)</label>
-            <input type="number" id="prop-rent" class="form-control" placeholder="2600">
-          </div>
-          <button type="submit" class="btn btn-primary">Generate Public Tenant Payment Links</button>
-        </form>
+      const sideButtons = document.querySelectorAll('.side-btn');
+      sideButtons.forEach(btn => btn.classList.remove('active'));
+      
+      if (evt && evt.currentTarget) {
+        evt.currentTarget.classList.add('active');
+      }
+    }
+  </script>
 
-        <div id="generated-links-output" style="margin-top: 1.5rem;"></div>
-      </section>
-
-      <!-- CONTACT & VOICE RECORDER -->
-      <section class="about-card">
-        <h3>Contact Samaritan Support</h3>
-        <p>Email: <strong>kolathatego@gmail.com</strong> | Phone: <strong>+27 72 344 9512</strong></p>
-        
-        <div class="form-group" style="margin-top: 1rem;">
-          <textarea class="form-control" rows="3" placeholder="Type your text message here..."></textarea>
-        </div>
-
-        <div class="voice-box">
-          <p><strong>Voice Note Recorder</strong></p>
-          <button id="record-btn" class="record-btn" onclick="toggleRecording()">🎤</button>
-          <p id="record-status" style="font-size:0.875rem; color:var(--text-muted);">Click icon to start recording</p>
-        </div>
-        <button class="btn btn-primary" style="margin-top: 1rem; width: 100%; justify-content: center;">Send Message</button>
-      </section>
-    </div>
-  </div>
-
-  <!-- ==========================================================================
-       VIEW 4: TENANT PAYMENT PORTAL
-       ========================================================================== -->
-  <div id="tenant-portal" class="portal-body hidden" style="margin-top: 3rem;">
-    <div class="about-card">
-      <div class="svg-logo" style="margin-bottom: 1rem;">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span>Samaritan Pay</span>
-      </div>
-      <h2 id="tenant-location">Lotus Gardens Phase 4</h2>
-      <p style="color:var(--text-muted);">Official Tenant Rent Checkout</p>
-
-      <form id="tenant-pay-form" style="margin-top: 1.5rem;">
-        <div class="form-group">
-          <label>Select Your Room Number</label>
-          <select id="room-select" class="form-control" onchange="calculateRent()">
-            <option value="">-- Select Room --</option>
-            <option value="1">Room 01</option>
-            <option value="2">Room 02</option>
-            <option value="3">Room 03</option>
-          </select>
-        </div>
-
-        <div class="stat-card" style="margin: 1.5rem 0; text-align: center;">
-          <h4>Calculated Monthly Rent</h4>
-          <div class="value" id="rent-display">R 0.00</div>
-        </div>
-
-        <div class="form-group">
-          <label>Tenant Full Name & Reference</label>
-          <input type="text" class="form-control" placeholder="e.g. John Doe - Room 01" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Pay Rent Now</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODALS -->
-  <div id="login-modal" class="modal-overlay hidden">
-    <div class="modal-card">
-      <h3>Landlord Log In</h3>
-      <form style="margin-top: 1rem;" onsubmit="event.preventDefault(); closeModal('login-modal');">
-        <div class="form-group"><label>Cellphone Number</label><input type="text" class="form-control" required></div>
-        <div class="form-group"><label>Password</label><input type="password" class="form-control" required></div>
-        <div style="display:flex; gap:0.5rem; justify-content: flex-end; margin-top:1.5rem;">
-          <button type="button" class="btn btn-outline" onclick="closeModal('login-modal')">Back</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div id="signin-modal" class="modal-overlay hidden">
-    <div class="modal-card">
-      <h3>Landlord Sign In (Register)</h3>
-      <form style="margin-top: 1rem;" onsubmit="event.preventDefault(); closeModal('signin-modal');">
-        <div class="form-group"><label>First Name</label><input type="text" class="form-control" required></div>
-        <div class="form-group"><label>Surname</label><input type="text" class="form-control" required></div>
-        <div class="form-group"><label>Cellphone</label><input type="text" class="form-control" required></div>
-        <div class="form-group"><label>Password</label><input type="password" class="form-control" required></div>
-        <div style="display:flex; gap:0.5rem; justify-content: flex-end; margin-top:1.5rem;">
-          <button type="button" class="btn btn-outline" onclick="closeModal('signin-modal')">Back</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- JavaScript Module & Main Script Links -->
-  <script type="module" src="app.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>
